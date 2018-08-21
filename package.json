@@ -1,0 +1,28 @@
+{
+  "scripts": {
+    "bootstrap": "lerna exec npm install",
+    "publish": "lerna publish --force-publish",
+    "test": "lerna run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/monpo/monorepo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/monpo/monorepo/issues"
+  },
+  "homepage": "https://github.com/monpo/monorepo#readme",
+  "keywords": [
+    "mono",
+    "repo",
+    "monorepo",
+    "package",
+    "manager",
+    "npm"
+  ],
+  "author": "Kristijan Sedlak (Xpepermint)",
+  "devDependencies": {
+    "lerna": "^3.1.1",
+    "nyc": "^12.0.2"
+  }
+}

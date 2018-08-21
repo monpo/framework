@@ -1,0 +1,13 @@
+{
+  "name": "@monpo/test1",
+  "version": "0.0.1",
+  "description": "Foo package for testing monpo.",
+  "scripts": {
+    "echo": "echo 0xd8q1271ga"
+  },
+  "verbose": "1.1.1",
+  "foo": {
+    "bar": 1534892014987
+  },
+  "baz": 1534892014987
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@monpo/init",
+  "version": "0.0.2",
+  "description": "Project generator for Monpo framework.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "clean": "rm -Rf ./dist; rm -Rf ./build",
+    "transpile": "npm run clean; tsc",
+    "prepare": "npm run transpile",
+    "test": "nyc hayspec test --require ts-node/register --match ./src/tests/**/*.test.ts"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "exclude": [
+      "src/tests"
+    ]
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@hayspec/cli": "^0.4.19",
+    "@hayspec/spec": "^0.4.19",
+    "@types/fs-extra": "^5.0.4",
+    "@types/node": "^10.3.2",
+    "nyc": "^12.0.2",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.1"
+  },
+  "dependencies": {
+    "fs-extra": "^7.0.0"
+  }
+}

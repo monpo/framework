@@ -33,5 +33,6 @@
   },
   "dependencies": {
     "fs-extra": "^7.0.0"
-  }
+  },
+  "gitHead": "4ca344bda0217bc7480d9702ed9ba6484c75dc13"
 }

@@ -11,7 +11,7 @@ spec.test('builds project structure', async (ctx) => {
   await generator.build();
   const pkg = pth.join(root, 'package.json');
   const src = JSON.parse(await fsx.readFile(pkg, 'utf8'));
-  ctx.is(src.scripts.list, 'monpa list');
+  ctx.is(src.scripts.list, 'monpo list');
 });
 
 export default spec;

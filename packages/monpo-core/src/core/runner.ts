@@ -3,7 +3,6 @@ import * as glob from 'fast-glob';
 import * as proc from '../lib/child-process';
 import * as fs from 'fs-extra';
 import * as dobj from 'object-path';
-import { Reporter } from './reporter';
 
 /**
  * Runner options.
@@ -12,7 +11,6 @@ export interface RunnerConfig {
   packages?: string;
   scope?: string[];
   verbose?: boolean;
-  reporter?: Reporter;
 }
 
 /**
@@ -28,7 +26,6 @@ export class Runner {
     this.config = {
       packages: pth.join(process.cwd(), 'packages'),
       scope: null,
-      reporter: new Reporter(),
       ...config,
     };
   }

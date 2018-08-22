@@ -1,5 +1,5 @@
 ```ts
-import { Runner } from '@monpa/core';
+import { Runner } from '@monpo/core';
 
 const runner = new Runner({
   packages: '/Users/foo/packages',

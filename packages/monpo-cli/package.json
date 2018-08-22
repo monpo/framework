@@ -21,6 +21,7 @@
   "license": "MIT",
   "devDependencies": {
     "@hayspec/cli": "^0.4.19",
+    "@hayspec/reporter": "^0.4.19",
     "@hayspec/spec": "^0.4.19",
     "@types/fs-extra": "^5.0.4",
     "@types/node": "^10.3.2",

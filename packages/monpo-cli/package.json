@@ -21,7 +21,6 @@
   "license": "MIT",
   "devDependencies": {
     "@hayspec/cli": "^0.4.19",
-    "@hayspec/reporter": "^0.4.19",
     "@hayspec/spec": "^0.4.19",
     "@types/fs-extra": "^5.0.4",
     "@types/node": "^10.3.2",
@@ -33,6 +32,7 @@
     "typescript": "^3.0.1"
   },
   "dependencies": {
+    "@hayspec/reporter": "^0.4.19",
     "@monpo/core": "^0.0.7",
     "@monpo/init": "^0.0.7",
     "yargs": "^12.0.1"

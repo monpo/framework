@@ -12,7 +12,7 @@ const spec = new Spec();
 spec.test('initializes current folder', async (ctx) => {
   const command = `mkdir -p ./node_modules/.tmp/test; cd ./node_modules/.tmp/test; ../../../bin/monpo init`;
   const { stdout, stderr } = await exec(command);
-  ctx.not(stdout.indexOf('Continue by running the commands below:'), -1);
+  ctx.not(stdout.indexOf('Continue by running the command below:'), -1);
   ctx.is(stderr, '');
 });
 
@@ -27,16 +27,16 @@ spec.test('lists package names', async (ctx) => {
 spec.test('executes a command in each package', async (ctx) => {
   const command = `../../../bin/monpo exec -- npm run echo`;
   const { stdout, stderr } = await exec(command, { cwd });
-  ctx.not(stdout.indexOf('0xdfh3271ga'), -1);
-  ctx.not(stdout.indexOf('0xd8q1271ga'), -1);
+  ctx.not(stdout.indexOf('test0 exec'), -1);
+  ctx.not(stdout.indexOf('test1 exec'), -1);
   ctx.is(stderr, '');
 });
 
 spec.test('executes a command in scoped package only', async (ctx) => {
   const command = `../../../bin/monpo exec --scope test1 -- npm run echo`;
   const { stdout, stderr } = await exec(command, { cwd });
-  ctx.is(stdout.indexOf('0xdfh3271ga'), -1);
-  ctx.not(stdout.indexOf('0xd8q1271ga'), -1);
+  ctx.is(stdout.indexOf('test0 exec'), -1);
+  ctx.not(stdout.indexOf('test1 exec'), -1);
   ctx.is(stderr, '');
 });
 

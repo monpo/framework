@@ -1,6 +1,6 @@
 {
   "name": "@monpo/core",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Core libraries for Monpo framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

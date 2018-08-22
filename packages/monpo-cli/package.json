@@ -1,6 +1,6 @@
 {
   "name": "@monpo/cli",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Command-line tool for Monpo framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@monpo/core": "^0.0.1",
-    "@monpo/init": "^0.0.4",
+    "@monpo/init": "^0.0.5",
     "yargs": "^12.0.1"
   },
   "gitHead": "59d261cbc0257a8fa0f79bd436cf0b243db5e359"

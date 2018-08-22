@@ -24,6 +24,7 @@ export default async function (argv) {
       `$ npm install`
     );
 
+    printer.end();
     process.exit(0);
   } catch (e) {
     console.error(e);

@@ -11,23 +11,24 @@ export default async function (argv) {
   const runner = new Runner({
     packages,
   });
-  const names = await runner.gether();
+  const names = await runner.scan();
   const count = names.length;
 
+  printer.end();
   if (count) {
     names.forEach((name) => {
       printer.end(
-        printer.indent(1, ''),
-        name
+        printer.colorize('cyanBright', `monpo `),
+        printer.colorize('gray', `result `),
+        `${name} `
       );
     });
-    printer.end();
   }
-
   printer.end(
-    printer.indent(1, ''),
+    printer.colorize('cyanBright', `monpo `),
     printer.colorize(count ? 'greenBright' : 'redBright', count),
     ' found'
   );
   printer.end();
+  process.exit(0);
 }

@@ -25,18 +25,18 @@ spec.test('lists package names', async (ctx) => {
 });
 
 spec.test('executes a command in each package', async (ctx) => {
-  const command = `../../../bin/monpo exec -- npm run echo`;
+  const command = `../../../bin/monpo exec npm run echo`;
   const { stdout, stderr } = await exec(command, { cwd });
-  ctx.not(stdout.indexOf('test0 exec'), -1);
-  ctx.not(stdout.indexOf('test1 exec'), -1);
+  ctx.not(stdout.indexOf('monpo test0 cmd exec "npm run echo"'), -1);
+  ctx.not(stdout.indexOf('monpo test1 cmd exec "npm run echo"'), -1);
   ctx.is(stderr, '');
 });
 
 spec.test('executes a command in scoped package only', async (ctx) => {
   const command = `../../../bin/monpo exec --scope test1 -- npm run echo`;
   const { stdout, stderr } = await exec(command, { cwd });
-  ctx.is(stdout.indexOf('test0 exec'), -1);
-  ctx.not(stdout.indexOf('test1 exec'), -1);
+  ctx.is(stdout.indexOf('monpo test0 cmd exec "npm run echo"'), -1);
+  ctx.not(stdout.indexOf('monpo test1 cmd exec "npm run echo"'), -1);
   ctx.is(stderr, '');
 });
 

@@ -12,26 +12,34 @@ export default async function (argv) {
     packages,
     scope: scope.length ? scope : null,
   });
-  const names = await runner.gether();
+  const names = await runner.scan();
   const count = names.length;
 
-  if (count) {
-    names.forEach((name) => {
+  printer.end();
+  for (const name of names) {
+    printer.end(
+      printer.colorize('cyanBright', `monpo `),
+      `${name} `,
+      printer.colorize('gray', `config `),
+      `${key}=${value}`
+    );
+    try {
+      await runner.configure(name, key.split('.'), value);
+    } catch (e) {
       printer.end(
-        printer.indent(1, ''),
-        name,
-        ' ', 
-        printer.colorize('gray', `set ${key}=${value}`)
+        printer.colorize('cyanBright', `monpo `),
+        `${name} `,
+        printer.colorize('redBright', `stderr `),
+        e.message
       );
-    });
-    printer.end();
-    await runner.configure(key.split('.'), value);
+    }
   }
 
   printer.end(
-    printer.indent(1, ''),
+    printer.colorize('cyanBright', `monpo `),
     printer.colorize(count ? 'greenBright' : 'redBright', count),
     ' configured'
   );
   printer.end();
+  process.exit(0);
 }

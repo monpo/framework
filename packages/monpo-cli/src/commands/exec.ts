@@ -5,7 +5,7 @@ import { Printer } from '@hayspec/reporter';
  * Initializes project directory.
  */
 export default async function (argv) {
-  const { packages, scope } = argv;
+  const { packages, scope, verbose } = argv;
   const cmd = argv['_'].slice(1).join(' ');
   const printer = new Printer();
 
@@ -13,26 +13,40 @@ export default async function (argv) {
     packages,
     scope: scope.length ? scope : null,
   });
-  const names = await runner.gether();
+  const names = await runner.scan();
   const count = names.length;
 
-  if (count) {
-    names.forEach((name) => {
+  printer.end();
+  for (const name of names) {
+    printer.end(
+      printer.colorize('cyanBright', `monpo `),
+      `${name} `,
+      printer.colorize('greenBright', `cmd `),
+      `exec ${JSON.stringify(cmd)}`
+    );
+    const output = await runner.exec(name, cmd);
+    output.stdout.split(/\n/).forEach((line) => {
       printer.end(
-        printer.indent(1, ''),
-        name,
-        ' ', 
-        printer.colorize('gray', `exec ${JSON.stringify(cmd)}`)
+        printer.colorize('cyanBright', `monpo `),
+        `${name} `,
+        printer.colorize('gray', `stdout `),
+        line
       );
     });
-    printer.end();
-    await runner.exec(cmd);
+    output.stderr.split(/\n/).forEach((line) => {
+      printer.end(
+        printer.colorize('cyanBright', `monpo `),
+        `${name} `,
+        printer.colorize('redBright', `stderr `),
+        line
+      );
+    });
   }
-
   printer.end(
-    printer.indent(1, ''),
+    printer.colorize('cyanBright', `monpo `),
     printer.colorize(count ? 'greenBright' : 'redBright', count),
     ' executed'
   );
   printer.end();
+  process.exit(0);
 }

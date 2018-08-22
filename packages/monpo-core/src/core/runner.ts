@@ -33,47 +33,32 @@ export class Runner {
   /**
    * Executes a command inside the projects.
    */
-  public async exec(cmd: string) {
-    const names = await this.gether();
-    const outputs = [];
-
-    for (const name of names) {
-      const { stdout, stderr } = await proc.exec(cmd, {
-        cwd: pth.join(this.config.packages, name),
-      });
-
-      if (stderr) {
-        throw stderr;
-      } else {
-        outputs.push(stdout);
-      }
-    }
-
-    return outputs as string[];
+  public async exec(name: string, cmd: string) {
+    return await proc.exec(cmd, {
+      cwd: pth.join(this.config.packages, name),
+    });
   }
 
   /**
    * Configures package.json files inside the projects.
    */
-  public async configure(path: string[], value: any) {
-    const names = await this.gether();
-    
-    for (const name of names) {
-      let file = pth.join(this.config.packages, name, 'package.json');
-      let data = await fs.readFile(file, 'utf8');
-      let json = JSON.parse(data);
+  public async configure(name: string, path: string[], value: any) {
+    let file = pth.join(this.config.packages, name, 'package.json');
+    let data = await fs.readFile(file, 'utf8');
+    let json = JSON.parse(data);
 
-      dobj.set(json, path, value);
+    dobj.set(json, path, value);
 
-      const src = JSON.stringify(json, null, 2);
-      await fs.writeFile(file, src, 'utf8');
-    }
+    const src = JSON.stringify(json, null, 2);
+    await fs.writeFile(file, src, 'utf8');
+
+    return json;
   }
 
   /**
    * Returns monorepo package names based on global class scope.
    */
-  public async gether() {
+  public async scan() {
     const match = pth.join(this.config.packages, '*')
     const dirs = await glob(match, { onlyDirectories: true }) as string[];
 

@@ -14,15 +14,17 @@ export default async function (argv) {
     await generator.build();
 
     printer.end(
-      printer.indent(1, ''),
+      printer.colorize('cyanBright', `monpo `),
+      printer.colorize('gray', `info `),
       `Continue by running the command below:`
     );
     printer.end(
-      printer.indent(2, ''),
-      printer.colorize('gray', `$ npm install`)
+      printer.colorize('cyanBright', `monpo `),
+      printer.colorize('gray', `info `),
+      `$ npm install`
     );
-    printer.end();
 
+    process.exit(0);
   } catch (e) {
     console.error(e);
   }

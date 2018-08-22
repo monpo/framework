@@ -1,6 +1,6 @@
 {
   "name": "@monpo/init",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Project generator for Monpo framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -34,5 +34,5 @@
   "dependencies": {
     "fs-extra": "^7.0.0"
   },
-  "gitHead": "26e0fa5a8d77c64e1be9d24413f93d21954bd9a2"
+  "gitHead": "c4dc757081f33137abdaaa74445f3f6eb4c2505f"
 }

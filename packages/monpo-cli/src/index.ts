@@ -10,10 +10,10 @@ import configureHandler from './commands/configure';
  */
 const { argv } = yargs
   .usage('Usage: $0 --help')
-  .command('init', 'Initializes project directory.',  (yargs) => yargs
+  .command('init', 'Initialize directory',  (yargs) => yargs
    .usage('Usage: $0'),
     initHandler)
-  .command('list', 'Lists packages', (yargs) => yargs
+  .command('list', 'List packages', (yargs) => yargs
     .usage('Usage: $0')
     .option('packages', {
       string: true,
@@ -21,7 +21,7 @@ const { argv } = yargs
       default: pth.join(process.cwd(), 'packages'),
     }),
     listHandler)
-  .command('exec', 'Runs an arbitrary command in each package', (yargs) => yargs
+  .command('exec', 'Run an arbitrary command in each package', (yargs) => yargs
     .usage('Usage: $0 -- npm run transpile')
     .option('packages', {
       string: true,
@@ -34,7 +34,7 @@ const { argv } = yargs
       default: [],
     }),
     execHandler)
-  .command('configure', 'Configures package.json in each package', (yargs) => yargs
+  .command('configure', 'Configure package.json in each package', (yargs) => yargs
     .usage('Usage: $0 --key version --value 1.0.0')
     .option('packages', {
       string: true,

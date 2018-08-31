@@ -1,0 +1,15 @@
+title: monpo
+heading: a lightweight, open source monorepo package manager
+logo: /assets/images/monpo.svg
+email: info@monpo.org
+google_analytics: 
+
+menu:
+  - url: '#monpo-framework'
+    title: What is Monpo
+  - url: '#installation'
+    title: Getting started 
+
+remote_theme: monpo/gp-theme
+plugins:
+  - jekyll-remote-theme

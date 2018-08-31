@@ -3,3 +3,6 @@
 .nyc_output
 node_modules
 lerna-debug.log
+_site
+Gemfile
+Gemfile.lock

@@ -1,7 +1,5 @@
 # Monpo framework
 
-> Monorepo package manager.
-
 This is a lightweight open source framework for managing mono repositories. The source code is available on [GitHub](https://github.com/monpo/framework) where you can also find our [issue tracker](https://github.com/monpo/framework/issues).
 
 ## Installation

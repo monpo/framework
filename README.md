@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/monpo/framework.svg?branch=master)](https://travis-ci.org/monpo/framework)&nbsp;[![codecov](https://codecov.io/gh/monpo/framework/branch/master/graph/badge.svg)](https://codecov.io/gh/monpo/framework)
-
 # Monpo framework
+
+[![Build Status](https://travis-ci.org/monpo/framework.svg?branch=master)](https://travis-ci.org/monpo/framework)&nbsp;[![codecov](https://codecov.io/gh/monpo/framework/branch/master/graph/badge.svg)](https://codecov.io/gh/monpo/framework)
 
 This is a lightweight open source framework for managing mono repositories. The source code is available on [GitHub](https://github.com/monpo/framework) where you can also find our [issue tracker](https://github.com/monpo/framework/issues).
 

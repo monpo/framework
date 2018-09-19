@@ -1,4 +1,4 @@
-# Monpo framework
+# Monpo Framework
 
 [![Build Status](https://travis-ci.org/monpo/framework.svg?branch=master)](https://travis-ci.org/monpo/framework)&nbsp;[![codecov](https://codecov.io/gh/monpo/framework/branch/master/graph/badge.svg)](https://codecov.io/gh/monpo/framework)
 

@@ -1,0 +1,15 @@
+{
+  "name": "@monpo/test2",
+  "version": "0.0.1",
+  "description": "Foo package for testing monpo.",
+  "scripts": {
+    "echo": "echo 0xcfa5392fb"
+  },
+  "verbose": "1.1.1",
+  "dependencies": {
+    "test1": "file:../test1"
+  },
+  "foo": {
+    "bar": 1538218737935
+  }
+}

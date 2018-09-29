@@ -10,7 +10,14 @@ const spec = new Spec();
 spec.test('method `scan()` returns list of packages', async (ctx) => {
   const runner = new Runner({ packages });
   const names = await runner.scan();
-  ctx.deepEqual(names, ['test0', 'test1']);
+  ctx.deepEqual(names, ['test0', 'test1', 'test2']);
+});
+
+spec.test('method `scan()` with smartsort returns a sorted list of packages', async (ctx) => {
+  const smartsort = true;
+  const runner = new Runner({ smartsort, packages });
+  const names = await runner.scan();
+  ctx.deepEqual(names, ['test1', 'test2', 'test0']);
 });
 
 spec.test('method `scan()` returns scoped list of packages', async (ctx) => {

@@ -1,0 +1,9 @@
+{
+  "name": "@monpo/test2",
+  "version": "0.0.1",
+  "description": "Foo package for testing monpo.",
+  "verbose": "1.1.1",
+  "dependencies": {
+    "test1": "file:../test1"
+  }
+}

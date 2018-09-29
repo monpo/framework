@@ -5,11 +5,12 @@ import { Printer } from '@hayspec/reporter';
  * Initializes project directory.
  */
 export default async function (argv) {
-  const { packages, scope, verbose } = argv;
+  const { smartsort, packages, scope, verbose } = argv;
   const cmd = argv['_'].slice(1).join(' ');
   const printer = new Printer();
 
   const runner = new Runner({
+    smartsort,
     packages,
     scope: scope.length ? scope : null,
   });

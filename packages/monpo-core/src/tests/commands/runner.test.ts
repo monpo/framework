@@ -13,17 +13,23 @@ spec.test('method `scan()` returns list of packages', async (ctx) => {
   ctx.deepEqual(names, ['test0', 'test1', 'test2']);
 });
 
-spec.test('method `scan()` with smartsort returns a sorted list of packages', async (ctx) => {
-  const smartsort = true;
-  const runner = new Runner({ smartsort, packages });
-  const names = await runner.scan();
-  ctx.deepEqual(names, ['test1', 'test2', 'test0']);
-});
-
 spec.test('method `scan()` returns scoped list of packages', async (ctx) => {
   const scope = ['test1'];
   const runner = new Runner({ packages, scope });
   const names = await runner.scan();
+  ctx.deepEqual(names, ['test1']);
+});
+
+spec.test('method `smartsort()` returns a sorted list of packages', async (ctx) => {
+  const runner = new Runner({ packages });
+  const names = await runner.smartsort();
+  ctx.deepEqual(names, ['test1', 'test2', 'test0']);
+});
+
+spec.test('method `smartsort()` returns scoped list of packages', async (ctx) => {
+  const scope = ['test1'];
+  const runner = new Runner({ packages, scope });
+  const names = await runner.smartsort();
   ctx.deepEqual(names, ['test1']);
 });
 

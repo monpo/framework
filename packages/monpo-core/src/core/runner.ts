@@ -12,7 +12,6 @@ export interface RunnerConfig {
   packages?: string;
   scope?: string[];
   verbose?: boolean;
-  smartsort?: boolean;
 }
 
 /**
@@ -28,7 +27,6 @@ export class Runner {
     this.config = {
       packages: pth.join(process.cwd(), 'packages'),
       scope: null,
-      smartsort: 'smartsort' in config ? config['smartsort'] : false,
       ...config,
     };
   }
@@ -63,14 +61,10 @@ export class Runner {
    */
   public async scan() {
     const match = pth.join(this.config.packages, '*')
-    const paths = await glob(match, { onlyDirectories: true }) as string[];
-    let names: string[];
-    if (this.config.smartsort) {
-      names = await this.reorder_by_dependencies(paths);
-    }
-    else {
-      names = paths.map((d) => d.split(/\\|\//).reverse()[0]);
-    }
+    const dirs = await glob(match, { onlyDirectories: true }) as string[];
+    dirs.sort();
+
+    const names = dirs.map((d) => d.split(/\\|\//).reverse()[0]);
     if (Array.isArray(this.config.scope)) {
       return names.filter((n) => this.config.scope.indexOf(n) !== -1);
     } else {
@@ -79,9 +73,11 @@ export class Runner {
   }
 
   /**
-   * Reorders packages based on a dependency graph
+   * Returns monorepo package names based on dependencies.
    */
-  protected async reorder_by_dependencies(paths: string[]) {
+  public async smartsort() {
+    const match = pth.join(this.config.packages, '*');
+    const paths = await glob(match, { onlyDirectories: true }) as string[];
     const package_paths = paths.map((p) => pth.join(p, "package.json"));
     const promises = package_paths.map(async path => {
       const conf = JSON.parse(await fs.readFile(path, 'utf8'));
@@ -103,7 +99,11 @@ export class Runner {
         }
       }
     }
-    return graph.overallOrder();
+    let names = graph.overallOrder();
+    if (Array.isArray(this.config.scope)) {
+      names = names.filter((n) => this.config.scope.indexOf(n) !== -1);
+    }
+    return names;
   }
 
 

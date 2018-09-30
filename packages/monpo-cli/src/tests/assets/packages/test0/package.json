@@ -6,7 +6,7 @@
     "echo": "echo 0xdfh3271ga"
   },
   "foo": {
-    "bar": 1538218737935
+    "bar": 1538296607750
   },
   "dependencies": {
     "test1": "file:../test1"

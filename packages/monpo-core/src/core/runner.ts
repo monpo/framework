@@ -75,31 +75,30 @@ export class Runner {
   /**
    * Returns monorepo package names based on dependencies.
    */
-  public async smartsort() {
-    const match = pth.join(this.config.packages, '*');
-    const paths = await glob(match, { onlyDirectories: true }) as string[];
-    const package_paths = paths.map((p) => pth.join(p, "package.json"));
-    const promises = package_paths.map(async path => {
-      const conf = JSON.parse(await fs.readFile(path, 'utf8'));
-      const a1 = "dependencies" in conf ? Object.keys(conf["dependencies"]) : [];
-      const a2 = "devDependencies" in conf ? Object.keys(conf["devDependencies"]) : [];
-      const name = path.split(/\\|\//).reverse()[1];
-      return {name: name, dependencies: a1.concat(a2)};
-    });
-    const deps = await Promise.all(promises);
+  public async smartsort(names: string[]) {
+    const paths = names.map((n) => pth.join(this.config.packages, n, 'package.json'));
+    const depGroups = await Promise.all(
+      paths.map(async path => {
+        const conf = JSON.parse(await fs.readFile(path, 'utf8'));
+        const a1 = 'dependencies' in conf ? Object.keys(conf['dependencies']) : [];
+        const a2 = 'devDependencies' in conf ? Object.keys(conf['devDependencies']) : [];
+        const name = path.split(/\\|\//).reverse()[1];
+        return { name: name, dependencies: a1.concat(a2) };
+      })
+    );
     const graph = new dgraph.DepGraph();
 
-    for (const dep_group of deps) {
-      graph.addNode(dep_group["name"]);
+    for (const depGroup of depGroups) {
+      graph.addNode(depGroup['name']);
     }
-    for (const dep_group of deps) {
-      for (const dep of dep_group["dependencies"]) {
+    for (const depGroup of depGroups) {
+      for (const dep of depGroup['dependencies']) {
         if (graph.hasNode(dep)) {
-          graph.addDependency(dep_group["name"], dep);
+          graph.addDependency(depGroup['name'], dep);
         }
       }
     }
-    let names = graph.overallOrder();
+    names = graph.overallOrder();
     if (Array.isArray(this.config.scope)) {
       names = names.filter((n) => this.config.scope.indexOf(n) !== -1);
     }

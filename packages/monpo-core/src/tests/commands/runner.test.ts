@@ -22,14 +22,14 @@ spec.test('method `scan()` returns scoped list of packages', async (ctx) => {
 
 spec.test('method `smartsort()` returns a sorted list of packages', async (ctx) => {
   const runner = new Runner({ packages });
-  const names = await runner.smartsort();
+  const names = await runner.smartsort(['test0', 'test1', 'test2']);
   ctx.deepEqual(names, ['test1', 'test2', 'test0']);
 });
 
 spec.test('method `smartsort()` returns scoped list of packages', async (ctx) => {
   const scope = ['test1'];
   const runner = new Runner({ packages, scope });
-  const names = await runner.smartsort();
+  const names = await runner.smartsort(['test0', 'test1', 'test2']);
   ctx.deepEqual(names, ['test1']);
 });
 

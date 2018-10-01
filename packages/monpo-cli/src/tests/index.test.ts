@@ -16,12 +16,22 @@ spec.test('initializes current folder', async (ctx) => {
   ctx.is(stderr, '');
 });
 
-spec.test('lists package names', async (ctx) => {
+spec.test('lists package names in alphabetic order', async (ctx) => {
   const command = `../../../bin/monpo list`;
   const { stdout, stderr } = await exec(command, { cwd });
   ctx.not(stdout.indexOf('test0'), -1);
   ctx.not(stdout.indexOf('test1'), -1);
+  ctx.not(stdout.indexOf('test2'), -1);
+  ctx.is(stdout.indexOf('test0') < stdout.indexOf('test1'), true);
+  ctx.is(stdout.indexOf('test1') < stdout.indexOf('test2'), true);
   ctx.is(stderr, '');
+});
+
+spec.test('lists dependand package names in right order', async (ctx) => {
+  const command = `../../../bin/monpo list -s`;
+  const { stdout, stderr } = await exec(command, { cwd });
+  ctx.is(stdout.indexOf('test1') < stdout.indexOf('test2'), true);
+  ctx.is(stdout.indexOf('test2') < stdout.indexOf('test0'), true);
 });
 
 spec.test('executes a command in each package', async (ctx) => {
@@ -29,6 +39,7 @@ spec.test('executes a command in each package', async (ctx) => {
   const { stdout, stderr } = await exec(command, { cwd });
   ctx.not(stdout.indexOf('monpo test0 cmd exec "npm run echo"'), -1);
   ctx.not(stdout.indexOf('monpo test1 cmd exec "npm run echo"'), -1);
+  ctx.not(stdout.indexOf('monpo test2 cmd exec "npm run echo"'), -1);
   ctx.is(stderr, '');
 });
 
@@ -37,6 +48,7 @@ spec.test('executes a command in scoped package only', async (ctx) => {
   const { stdout, stderr } = await exec(command, { cwd });
   ctx.is(stdout.indexOf('monpo test0 cmd exec "npm run echo"'), -1);
   ctx.not(stdout.indexOf('monpo test1 cmd exec "npm run echo"'), -1);
+  ctx.is(stdout.indexOf('monpo test2 cmd exec "npm run echo"'), -1);
   ctx.is(stderr, '');
 });
 
@@ -46,8 +58,10 @@ spec.test('configures package.json in each package', async (ctx) => {
   const { stderr } = await exec(command, { cwd });
   const test0 = JSON.parse(await fs.readFile(pth.join(cwd, 'packages', 'test0', 'package.json'), 'utf8'));
   const test1 = JSON.parse(await fs.readFile(pth.join(cwd, 'packages', 'test1', 'package.json'), 'utf8'));
+  const test2 = JSON.parse(await fs.readFile(pth.join(cwd, 'packages', 'test2', 'package.json'), 'utf8'));
   ctx.is(test0.foo.bar, value);
   ctx.is(test1.foo.bar, value);
+  ctx.is(test2.foo.bar, value);
   ctx.is(stderr, '');
 });
 

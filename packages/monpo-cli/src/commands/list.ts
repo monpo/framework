@@ -11,7 +11,10 @@ export default async function (argv) {
   const runner = new Runner({
     packages,
   });
-  const names = await runner.scan();
+  let names = await runner.scan();
+  if (argv["smartsort"]) {
+    names = await runner.smartsort(names);
+  }
   const count = names.length;
 
   printer.end();

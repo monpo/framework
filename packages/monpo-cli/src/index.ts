@@ -15,6 +15,11 @@ const { argv } = yargs
     initHandler)
   .command('list', 'List packages', (yargs) => yargs
     .usage('Usage: $0')
+    .option('smartsort', {
+      alias: 's',
+      description: 'Sort packages so they appear in right order regarding their dependencies.',
+      default: false,
+    })
     .option('packages', {
       string: true,
       description: 'Main directory path',
@@ -23,6 +28,11 @@ const { argv } = yargs
     listHandler)
   .command('exec', 'Run an arbitrary command in each package', (yargs) => yargs
     .usage('Usage: $0 -- npm run transpile')
+    .option('smartsort', {
+      alias: 's',
+      description: 'Sort packages so they appear in right order regarding their dependencies.',
+      default: false,
+    })
     .option('packages', {
       string: true,
       description: 'Main directory path',

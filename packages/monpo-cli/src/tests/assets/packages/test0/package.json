@@ -6,6 +6,13 @@
     "echo": "echo 0xdfh3271ga"
   },
   "foo": {
-    "bar": 1534947719405
+    "bar": 1538405553879
+  },
+  "dependencies": {
+    "test1": "file:../test1"
+  },
+  "devDependencies": {
+    "foo": "2.x",
+    "test2": "file:../test2"
   }
 }

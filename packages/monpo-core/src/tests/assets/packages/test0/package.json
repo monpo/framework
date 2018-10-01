@@ -8,5 +8,12 @@
   "foo": {
     "bar": 1534938445235
   },
-  "baz": 1534947714559
+  "baz": 1538404253253,
+  "dependencies": {
+    "test1": "file:../test1"
+  },
+  "devDependencies": {
+    "foo": "2.x",
+    "test2": "file:../test2"
+  }
 }

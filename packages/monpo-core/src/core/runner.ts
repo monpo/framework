@@ -76,9 +76,10 @@ export class Runner {
    * Returns monorepo package names based on dependencies.
    */
   public async smartsort(names: string[]) {
+
     const paths = names.map((n) => pth.join(this.config.packages, n, 'package.json'));
     const depGroups = await Promise.all(
-      paths.map(async path => {
+      paths.map(async (path) => {
         const conf = JSON.parse(await fs.readFile(path, 'utf8'));
         const a1 = 'dependencies' in conf ? Object.keys(conf['dependencies']) : [];
         const a2 = 'devDependencies' in conf ? Object.keys(conf['devDependencies']) : [];
@@ -86,24 +87,25 @@ export class Runner {
         return { name: name, dependencies: a1.concat(a2) };
       })
     );
+
     const graph = new dgraph.DepGraph();
-
-    for (const depGroup of depGroups) {
-      graph.addNode(depGroup['name']);
-    }
-    for (const depGroup of depGroups) {
-      for (const dep of depGroup['dependencies']) {
+    depGroups.forEach((grp) => {
+      graph.addNode(grp['name']);
+    });
+    depGroups.forEach((grp) => {
+      grp['dependencies'].forEach((dep) => {
         if (graph.hasNode(dep)) {
-          graph.addDependency(depGroup['name'], dep);
+          graph.addDependency(grp['name'], dep);
         }
-      }
-    }
-    names = graph.overallOrder();
-    if (Array.isArray(this.config.scope)) {
-      names = names.filter((n) => this.config.scope.indexOf(n) !== -1);
-    }
-    return names;
-  }
+      });
+    });
 
+    const list = graph.overallOrder();
+    if (Array.isArray(this.config.scope)) {
+      return list.filter((n) => this.config.scope.indexOf(n) !== -1);
+    } else {
+      return list;
+    }
+  }
 
 }

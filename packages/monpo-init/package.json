@@ -1,6 +1,6 @@
 {
   "name": "@monpo/init",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "Project generator for Monpo framework.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -23,16 +23,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@hayspec/cli": "^0.4.19",
-    "@hayspec/spec": "^0.4.19",
+    "@hayspec/cli": "^0.4.21",
+    "@hayspec/spec": "^0.4.21",
     "@types/fs-extra": "^5.0.4",
-    "@types/node": "^10.3.2",
-    "nyc": "^12.0.2",
+    "@types/node": "^10.11.3",
+    "nyc": "^13.0.1",
     "ts-node": "^7.0.1",
-    "typescript": "^3.0.1"
+    "typescript": "^3.1.1"
   },
   "dependencies": {
     "fs-extra": "^7.0.0"
-  },
-  "gitHead": "75679d0b05d8c181ed5dff0cf6f1915ff7b56bbb"
+  }
 }

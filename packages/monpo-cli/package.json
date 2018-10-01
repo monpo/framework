@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@hayspec/reporter": "^0.4.19",
-    "@monpo/core": "latest",
+    "@monpo/core": "^0.1.2",
     "@monpo/init": "latest",
     "yargs": "^12.0.1"
   },

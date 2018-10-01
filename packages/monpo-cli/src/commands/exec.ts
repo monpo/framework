@@ -13,13 +13,11 @@ export default async function (argv) {
     packages,
     scope: scope.length ? scope : null,
   });
-  let names;
+  let names = await runner.scan();
   if (argv["smartsort"]) {
-    names = await runner.smartsort();
+    names = await runner.smartsort(names);
   }
-  else {
-    names = await runner.scan();
-  }
+
   const count = names.length;
 
   printer.end();
